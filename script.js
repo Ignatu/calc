@@ -18,7 +18,8 @@ for (var i = 0; i < numbers.length; i++) {
 for (var i = 0; i < operations.length; i++) {
   var operationBtn = operations[i];
   operationBtn.addEventListener('click', function (e) {
-    operationPress(e.target.textContent)
+    console.log(e)
+    operationPress(e.target.textContent);
   });
 }
 
@@ -47,10 +48,10 @@ function numberPress(number) {
 function operationPress(op) {
   let localOperationMemory = display.value;
 
-  if (MemoryNewNumber && MemoryPendingOperation !== '=' || op === '√' || op === '²' ) {
-    if ( op === '²') {
-      MemoryCurrentNumber = (+localOperationMemory) ** 2
-    } else if ( op === '√' ) {
+  if ((MemoryNewNumber && MemoryPendingOperation !== '=') || op === 'x²' || op === '√') {
+    if (op === 'x²') {
+      MemoryCurrentNumber = Number(localOperationMemory) ** 2;
+    } else if (op === '√') {
       MemoryCurrentNumber = Math.sqrt(+localOperationMemory);
     }
     display.value = MemoryCurrentNumber;
@@ -63,12 +64,14 @@ function operationPress(op) {
     } else if (MemoryPendingOperation === '*') {
       MemoryCurrentNumber *= +localOperationMemory;
     } else if (MemoryPendingOperation === '/') {
-      MemoryCurrentNumber /= +localOperationMemory;}
-    else {
+      MemoryCurrentNumber /= +localOperationMemory;
+    } else {
+
       MemoryCurrentNumber = +localOperationMemory;
     }
     display.value = MemoryCurrentNumber;
     MemoryPendingOperation = op;
+
   }
 }
 
