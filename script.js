@@ -47,7 +47,12 @@ function numberPress(number) {
 function operationPress(op) {
   let localOperationMemory = display.value;
 
-  if (MemoryNewNumber && MemoryPendingOperation !== '=') {
+  if (MemoryNewNumber && MemoryPendingOperation !== '=' || op === '√' || op === '²' ) {
+    if ( op === '²') {
+      MemoryCurrentNumber = (+localOperationMemory) ** 2
+    } else if ( op === '√' ) {
+      MemoryCurrentNumber = Math.sqrt(+localOperationMemory);
+    }
     display.value = MemoryCurrentNumber;
   } else {
     MemoryNewNumber = true;
@@ -58,8 +63,8 @@ function operationPress(op) {
     } else if (MemoryPendingOperation === '*') {
       MemoryCurrentNumber *= +localOperationMemory;
     } else if (MemoryPendingOperation === '/') {
-      MemoryCurrentNumber /= +localOperationMemory;
-    } else {
+      MemoryCurrentNumber /= +localOperationMemory;}
+    else {
       MemoryCurrentNumber = +localOperationMemory;
     }
     display.value = MemoryCurrentNumber;
